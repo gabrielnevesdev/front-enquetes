@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: install dependences
+        run: npm install
+
+      - name: build
+        run: npm run build
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.4.0
         with:
@@ -21,4 +27,4 @@ jobs:
 
       - name: Deploy to Google Cloud Storage
         run: |
-          gsutil cp -r dist/* gs://${{ secrets.GCS_BUCKET_NAME }}
+          gsutil cp -r build/* gs://${{ secrets.GCS_BUCKET_NAME }}
